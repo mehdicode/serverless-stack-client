@@ -11,21 +11,18 @@ export default function Login(props) {
     return email.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-  }
+async function handleSubmit(event) {
+  event.preventDefault();
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-  
-    try {
-      await Auth.signIn(email, password);
-      props.userHasAuthenticated(true);
-      alert("Logged in");
-    } catch (e) {
-      alert(e.message);
-    }
+  try {
+    await Auth.signIn(email, password);
+    props.userHasAuthenticated(true);
+    props.history.push("/");
+  } catch (e) {
+    alert(e.message);
   }
+}
+
 
   return (
     <div className="Login">
